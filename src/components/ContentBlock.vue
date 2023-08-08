@@ -1,97 +1,72 @@
 <template>
   <v-container>
-    <v-row
-        align="center"
-        justify="center"
-        class="ma-4"
-    >
-      <v-col cols="12">
-        <Logo />
-      </v-col>
-
-      <v-col
-          cols="12"
-          md="4"
-      >
-        <v-select
-            v-model="variant"
-            :items="items"
-            clearable
-            label="Filter by country"
-        ></v-select>
-
-        <v-select
-            v-model="variant"
-            :items="items"
-            clearable
-            label="Filter by score"
-        ></v-select>
-      </v-col>
-
-      <v-col
-          cols="12"
-          md="4"
-      >
-        <v-card
-            max-width="450"
-            class="mx-auto"
-        >
-          <v-list three-line>
-            <List v-for="(item, index) in users" v-bind="{ item }" :key="index" />
-          </v-list>
-        </v-card>
-
-      </v-col>
+    <v-row align="center" justify="center" class="ma-4">
+      <Logo />
+      <ContentFilter 
+        @countryFilter="changeCountryFilter"
+        @scoreFilter="changeScoreFilter" 
+        @url="fetchList"
+        @resetBtn="resetList"
+      />
+      <ContentList />
     </v-row>
   </v-container>
 </template>
 
 <script>
-  import List from './ContentBlock/List.vue';
-  import Logo from './ContentBlock/Logo.vue';
-  export default {
-    name: "ContentBlock",
-    components: { List, Logo },
-      data: () => ({
-        items: [
-            "russia",
-            "usa",
-            "> 20",
-            "< 10",
-        ],
-        variant: "default",
-        users: [
-            { header: "List" },
-            {
-                avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-                title: "Brunch this weekend?",
-                subtitle: `<span class="text--primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
-            },
-            { divider: true, inset: true },
-            {
-                avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-                title: "Summer BBQ <span class=\"grey--text text--lighten-1\">4</span>",
-                subtitle: `<span class="text--primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
-            },
-            { divider: true, inset: true },
-            {
-                avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
-                title: "Oui oui",
-                subtitle: "<span class=\"text--primary\">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?",
-            },
-            { divider: true, inset: true },
-            {
-                avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-                title: "Birthday gift",
-                subtitle: "<span class=\"text--primary\">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?",
-            },
-            { divider: true, inset: true },
-            {
-                avatar: "https://cdn.vuetifyjs.com/images/lists/5.jpg",
-                title: "Recipe to try",
-                subtitle: "<span class=\"text--primary\">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.",
-            },
-        ],
-    }),
+import { mapActions, mapMutations } from 'vuex'
+import Logo from './ContentBlock/Logo.vue'
+import ContentFilter from './ContentBlock/Filter.vue'
+import ContentList from './ContentBlock/List.vue'
+import data from '../assets/data.json'
+
+export default {
+  name: 'ContentBlock',
+  components: {
+    Logo,
+    ContentFilter,
+    ContentList,
+  },
+
+  methods: {
+    ...mapActions([
+      'fetchList'
+    ]),
+    ...mapMutations([
+      'setApi',
+      'setLocalList',
+      'setCountryFilter',
+      'setScoreFilter',
+      'setFilteredUsers',
+      'setFilterStatus'
+    ]),
+    
+    fetchList(apiUrl) {
+      this.setApi(apiUrl)
+      this.fetchList()
+    },
+
+    resetList() {
+      this.setLocalList(data)
+    },
+
+    changeScoreFilter(score) {
+      this.setScoreFilter(score)
+      this.setFilterStatus()
+      this.setFilteredUsers()
+    },
+
+    changeCountryFilter(country) {
+      this.setCountryFilter(country)
+      this.setFilterStatus()
+      this.setFilteredUsers()
+    },
+  },
+
+  data: () => ({}),
+  
+  created() {
+    this.resetList();
+  }
 }
 </script>

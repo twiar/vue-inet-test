@@ -1,0 +1,50 @@
+[
+  {
+    "avatar": "https://cdn.vuetifyjs.com/images/lists/1.jpg",
+    "title": "Brunch this weekend?",
+    "subtitle": "Ali Connors — I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
+    "country": "usa",
+    "score": 4,
+    "address": "1808 Jerry Toth Drive"
+  },
+  {
+    "avatar": "https://cdn.vuetifyjs.com/images/lists/2.jpg",
+    "title": "Summer BBQ",
+    "subtitle": "to Alex, Scott, Jennifer — Wish I could come, but I'm out of town this weekend.",
+    "country": "russia",
+    "score": 55,
+    "address": "2434 Green Gate Lane"
+  },
+  {
+    "avatar": "https://cdn.vuetifyjs.com/images/lists/3.jpg",
+    "title": "Oui oui",
+    "subtitle": "Sandra Adams — Do you have Paris recommendations? Have you ever been?",
+    "country": "russia",
+    "score": 12,
+    "address": "2827 Smithfield Avenue"
+  },
+  {
+    "avatar": "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+    "title": "Birthday gift",
+    "subtitle": "Trevor Hansen — Have any ideas about what we should get Heidi for her birthday?",
+    "country": "usa",
+    "score": 6,
+    "address": "3612 Locust View Drive"
+  },
+  {
+    "avatar": "https://cdn.vuetifyjs.com/images/lists/5.jpg",
+    "title": "Recipe to try",
+    "subtitle": "Britta Holt — We should eat this: Grate, Squash, Corn, and tomatillo Tacos.",
+    "country": "russia",
+    "score": 15,
+    "address": "1393 Jerome Avenue"
+  },
+  {
+    "avatar": "https://cdn.vuetifyjs.com/images/lists/2.jpg",
+    "title": "Try to recipe",
+    "subtitle": "Britta Holten — Have any ideas about what we should get Heidi for her birthday?",
+    "country": "usa",
+    "score": 15,
+    "address": "3381 Simons Hollow Road"
+  }
+]

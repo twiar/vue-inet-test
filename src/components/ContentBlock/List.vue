@@ -1,35 +1,54 @@
 <template>
-	<v-subheader
-			v-if="item.header"
-			:key="item.header"
-			v-text="item.header"
-	></v-subheader>
-
-	<v-divider
-			v-else-if="item.divider"
-			:key="index"
-			:inset="item.inset"
-	></v-divider>
-
-	<v-list-item
-			v-else
-			:key="item.title"
-	>
-		<v-list-item-avatar>
-			<v-img :src="item.avatar"></v-img>
-		</v-list-item-avatar>
-
-		<v-list-item-content>
-			<v-list-item-title v-html="item.title"></v-list-item-title>
-			<v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
-		</v-list-item-content>
-	</v-list-item>
+  <v-col cols="12" md="4">
+    <v-card max-width="450" class="mx-auto">
+      <v-list three-line v-if="filterActive">
+        <v-subheader>List</v-subheader>
+        <Item v-for="(item, index) in filteredUsers" :key="item.title" :item="item" :index="index" @avatar="showPopup"/>
+      </v-list>
+      <v-list three-line v-else>
+        <v-subheader>List</v-subheader>
+        <Item v-for="(item, index) in users" :key="item.title" :item="item" :index="index" @avatar="showPopup"/>
+      </v-list>
+    </v-card>
+  </v-col>
 </template>
 
 <script>
-	export default {
-		props: {
-			item: Object,
-		}
-	}
+import { mapMutations, mapState } from 'vuex';
+import Item from './List/Item.vue'
+
+export default {
+  name: 'ContentList',
+  components: {
+    Item,
+  },
+  computed: {
+    ...mapState([
+      'users',
+      'filteredUsers',
+      'filterActive'
+    ]),
+    filteredUsersLength(){
+      return this.filteredUsers.length
+    },
+    usersLength(){
+      return this.users.length
+    }
+  },
+  methods: {
+    ...mapMutations([
+      'setIndex',
+      'setPopupStatus'
+    ]),
+    showPopup(index){
+      this.setPopupStatus(true, index)
+    }
+  },
+  watch: {
+    filteredUsersLength(){
+      this.setIndex(this.filteredUsersLength)
+    }
+  },
+  data: () => ({}),
+}
 </script>
