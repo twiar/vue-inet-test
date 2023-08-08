@@ -16,11 +16,11 @@
       </v-menu>
 
       <v-list-item-content>
-        <v-list-item-title>{{ item.title }}</v-list-item-title>
-        <v-list-item-subtitle class="text--primary">{{ item.subtitle }}</v-list-item-subtitle>
+        <v-list-item-title>{{ item.title }} <span class="grey--text text--lighten-1">{{ item.score }}</span></v-list-item-title>
+        <v-list-item-subtitle><span class="text--primary">{{ item.subtitle.split('—')[0] }}</span>— {{ item.subtitle.split('—')[1] }}</v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
-    <v-divider v-if="index < index" inset></v-divider>
+    <v-divider v-if="index < dynamicIndex" inset></v-divider>
   </div>
 </template>
 
